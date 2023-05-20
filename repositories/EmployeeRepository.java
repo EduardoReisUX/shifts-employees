@@ -5,19 +5,15 @@ import java.util.UUID;
 
 import entities.Employee;
 
-public class EmployeeRepository implements IEmployeeRepository {
-    private List<Employee> employeesInMemory;
+public class EmployeeRepository {
+    private List<Employee> employees;
 
-    public EmployeeRepository(List<Employee> employeesInMemory) {
-        this.employeesInMemory = employeesInMemory;
-    }
-
-    public List<Employee> getEmployees() {
-        return employeesInMemory;
+    public EmployeeRepository(List<Employee> employees) {
+        this.employees = employees;
     }
 
     public Employee findEmployeeByID(UUID id) {
-        for (Employee employee : employeesInMemory) {
+        for (Employee employee : employees) {
             if (employee.getId().equals(id)) {
                 return employee;
             }
@@ -27,7 +23,7 @@ public class EmployeeRepository implements IEmployeeRepository {
     }
 
     public Employee findEmployeeByCost(int cost) {
-        for (Employee employee : employeesInMemory) {
+        for (Employee employee : employees) {
             if (employee.getCost() == cost) {
                 return employee;
             }
@@ -36,28 +32,16 @@ public class EmployeeRepository implements IEmployeeRepository {
         throw new Error("Turno não encontrado!");
     }
 
-    public String findSkillByName(UUID id, String name) {
-        Employee employee = findEmployeeByID(id);
+    public void createEmployee(String[] skills, int cost) {
+        Employee employee = new Employee(skills, cost);
 
-        for (String skill : employee.getSkills()) {
-            if (skill.contains(name)) {
-                return skill;
-            }
-        }
-
-        throw new Error("Habilidade do funcionário não encontrada!");
+        employees.add(employee);
     }
 
-    public void create(String[] skills, int cost, int disponibility) {
-        Employee employee = new Employee(skills, cost, disponibility);
-
-        employeesInMemory.add(employee);
-    }
-
-    public void delete(UUID id) {
+    public void deleteEmployee(UUID id) {
         Employee employee = findEmployeeByID(id);
 
-        employeesInMemory.remove(employee);
+        employees.remove(employee);
     }
 
 }

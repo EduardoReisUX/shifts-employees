@@ -37,11 +37,11 @@ public class CloseShiftTest {
     @Test
     public void shouldBeAbleToCloseShift() {
         // Arrange
-        employeeRepository.create(new String[] { "skill1", "skill2" }, 50, 0);
-        shiftRepository.create(new String[] { "skill1", "skill2" }, 100);
+        employeeRepository.createEmployee(new String[] { "skill1", "skill2" }, 50);
+        shiftRepository.createShift(new String[] { "skill1", "skill2" }, 100);
 
         Employee employee = employeeRepository.findEmployeeByCost(50);
-        Shift shift = shiftRepository.findShiftByCostLimit(100);
+        Shift shift = shiftRepository.findShiftByBudget(100);
 
         assignEmployeeToShift.execute(employee.getId(), shift.getId());
 
@@ -58,11 +58,11 @@ public class CloseShiftTest {
     @Test
     public void shouldNotBeAbleToCloseShiftIfAllSkillsDoesntMatchRequirements() {
         // Arrange
-        employeeRepository.create(new String[] { "skill2" }, 50, 0);
-        shiftRepository.create(new String[] { "skill1", "skill2" }, 100);
+        employeeRepository.createEmployee(new String[] { "skill2" }, 50);
+        shiftRepository.createShift(new String[] { "skill1", "skill2" }, 100);
 
         Employee employee = employeeRepository.findEmployeeByCost(50);
-        Shift shift = shiftRepository.findShiftByCostLimit(100);
+        Shift shift = shiftRepository.findShiftByBudget(100);
 
         assignEmployeeToShift.execute(employee.getId(), shift.getId());
 

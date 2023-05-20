@@ -75,4 +75,40 @@ public class Shift {
         employees.add(employee);
         setCurrentCost(employee.getCost());
     }
+
+    public void printQuantity() {
+        System.out.println("Quantidade de Turnos: " + Shift.quantity);
+    }
+
+    public void printInfos() {
+        System.out.println("\n---------- TURNO " + this.id.toString().substring(0, 10) + "... ---------");
+
+        System.out.println("Requisitos: ");
+        if (this.getRequirements().length > 0) {
+            for (String requirement : this.requirements) {
+                System.out.println("\t" + requirement);
+            }
+        } else {
+            System.out.println("Nenhum requisito associado ao turno");
+        }
+
+        System.out.println("Custo atual: " + this.currentCost);
+        System.out.println("Orçamento: " + this.budget);
+
+        if (isClosed) {
+            System.out.println("Turno está fechado? SIM");
+        } else {
+            System.out.println("Turno está fechado? NÃO");
+        }
+
+        System.out.println("Funcionários: ");
+        if (this.getEmployees().size() > 0) {
+            for (Employee employee : this.employees) {
+                System.out.println("\tUUID: " + employee.getId().toString().substring(0, 10) + "...");
+            }
+        } else {
+            System.out.println("\tNenhum funcionário associado ao turno");
+        }
+
+    }
 }

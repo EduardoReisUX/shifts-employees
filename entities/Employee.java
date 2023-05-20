@@ -7,13 +7,11 @@ public class Employee {
     private UUID id;
     private String[] skills;
     private int cost;
-    private int disponibility;
 
-    public Employee(String[] skills, int cost, int disponibility) {
+    public Employee(String[] skills, int cost) {
         this.id = UUID.randomUUID();
         this.skills = skills;
         this.cost = cost;
-        // this.disponibility = disponibility;
         quantity++;
     }
 
@@ -41,11 +39,23 @@ public class Employee {
         this.cost = cost;
     }
 
-    public int getDisponibility() {
-        return disponibility;
+    public void printQuantity() {
+        System.out.println("Quantidade de funcionários: " + Employee.quantity);
     }
 
-    public void setDisponibility(int disponibility) {
-        this.disponibility = disponibility;
+    public void printInfos() {
+        System.out.println("\n--------- FUNCIONÁRIO " + this.id.toString().substring(0, 10) + "... ---------");
+
+        System.out.println("Habilidades: ");
+        if (this.getSkills().length > 0) {
+            for (String skill : this.skills) {
+                System.out.println("\t" + skill);
+            }
+        } else {
+            System.out.println("Nenhuma habilidade associado ao funcionário");
+        }
+
+        System.out.println("Custo: " + this.cost);
+
     }
 }

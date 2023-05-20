@@ -45,6 +45,5 @@ public class AssignEmployeeToShift {
         }
 
         shift.addEmployee(employee);
-        System.out.println("OK - O funcionário foi atribuido ao turno.");
     }
 }
